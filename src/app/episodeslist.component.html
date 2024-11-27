@@ -1,0 +1,6 @@
+<h2>Episodes list load. Check console log</h2>
+<div>
+@for (eps of episodes; track eps) {
+  <p><a (click)="selectEpisode(eps)" href="javascript: void(0)">{{ eps.title }}</a></p>
+}
+</div>

@@ -1,0 +1,31 @@
+import { NgModule } from "@angular/core";
+
+import {
+  MatButtonModule,
+  MatToolbarModule,
+  MatSliderModule,
+  MatIconModule,
+  MatListModule
+} from "@angular/material";
+
+import { StickyPlayerComponent } from "./stickyplayer.component";
+import { EpisodeTimeFormatPipe } from "./episodetimeformat.pipe";
+
+const modules = [
+  MatButtonModule,
+  MatToolbarModule,
+  MatSliderModule,
+  MatIconModule,
+  MatListModule,
+];
+
+@NgModule({
+  declarations: [
+    StickyPlayerComponent,
+    EpisodeTimeFormatPipe,
+  ],
+  imports: [modules, EpisodeTimeFormatPipe],
+  exports: [modules, StickyPlayerComponent],
+  providers: [ EpisodeTimeFormatPipe ],
+})
+export class StickyPlayerModule {}
