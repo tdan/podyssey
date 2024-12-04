@@ -9,6 +9,7 @@ import { StreamEpisodeService } from './core/services/streamepisode.service';
 import { Subscription } from 'rxjs';
 import { StreamState } from './core/models/stream-state.interface';
 import { EpisodeTimeFormatPipe } from "./episodetimeformat.pipe";
+import { FormsModule } from '@angular/forms';
 
 const modules = [
   MatButtonModule,
@@ -16,6 +17,7 @@ const modules = [
   MatSliderModule,
   MatIconModule,
   MatListModule,
+  FormsModule,
 ];
 
 @Component({
@@ -36,11 +38,16 @@ export class StickyPlayerComponent implements OnDestroy {
     isPlayable: false,
   };
 
+  public sliderValue = this.state.currentTime;
+  public sliderMax = this.state.duration;
+
   private streamObserver: Subscription;
 
   constructor(private streamEpisodeService: StreamEpisodeService) {
     this.streamObserver = streamEpisodeService.getState().subscribe((value) => {
       this.state = value;
+      // this.sliderValue = this.state.currentTime;
+      // this.sliderMax = this.state.duration;
     });
   }
 
@@ -60,5 +67,14 @@ export class StickyPlayerComponent implements OnDestroy {
     this.streamEpisodeService.pause();
     console.log("[StickyPlayerComponent.pause]")
     console.log(this.state);
+  }
+
+  public seek(seconds: number) {
+    this.streamEpisodeService.seekTo(this.state.currentTime + seconds);
+  }
+
+  public seekTo(value: number | string) {
+    const destinationTimeInSeconds = Number(value);
+    this.streamEpisodeService.seekTo(destinationTimeInSeconds);
   }
 }

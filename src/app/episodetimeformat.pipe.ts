@@ -6,7 +6,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class EpisodeTimeFormatPipe implements PipeTransform {
 
-  transform(totalSeconds: number): string {
+  transform(value: number | string): string {
+    // cast to number type first in case value is a string
+    const totalSeconds = Number(value);
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor( (totalSeconds % 3600) / 60);
     const seconds = Math.floor(totalSeconds % 60);

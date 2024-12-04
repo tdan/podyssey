@@ -57,8 +57,8 @@ export class StreamEpisodeService {
     }
   }
 
-  public seekTo(seconds: number) {
-    this.audioObj.currentTime = seconds;
+  public seekTo(destinationTimeInSeconds: number) {
+    this.audioObj.currentTime = destinationTimeInSeconds;
   }
 
   public stop() {
