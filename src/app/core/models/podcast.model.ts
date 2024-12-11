@@ -1,22 +1,21 @@
 import { Feed } from './feed.model';
 
-export class Episode extends Feed{
-  datePublished: string;
-  duration: number;
+export class Podcast extends Feed {
+  author: string;
+  website: string;
 
   constructor(
     id: number,
     guid: string,
     title: string,
+    author: string,
     desc: string,
-    datePublished: string,
-    duration:number,
     url: string,
+    homeLink: string,
     image: string
   ) {
     super(id, guid, title, desc, url, image);
-    this.datePublished = datePublished;
-    this.duration = duration;
+    this.author = author;
+    this.website = homeLink;
   }
-
 }

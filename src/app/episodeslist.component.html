@@ -1,6 +1,13 @@
-<h2>Episodes list load. Check console log</h2>
-<div>
+<div class="episodes-list">
+<mat-list>
 @for (eps of episodes; track eps) {
-  <p><a (click)="selectEpisode(eps)" href="javascript: void(0)">{{ eps.title }}</a></p>
+  <mat-list-item lines="3">
+    <a (click)="onEpisodeSelected(eps)" href="javascript: void(0)"
+        matListItemIcon><img src= "{{ eps.imageUrl }}" /></a>
+    <span matListItemTitle><a (click)="onEpisodeSelected(eps)" href="javascript:
+        void(0)">{{ eps.title }}</a></span>
+     <span [innerHTML]="eps.description"></span>
+  </mat-list-item>
 }
+</mat-list>
 </div>

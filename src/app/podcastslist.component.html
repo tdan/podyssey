@@ -1,0 +1,12 @@
+<div class="podcasts-list">
+<mat-list>
+@for (podcast of podcasts; track podcast) {
+  <mat-list-item>
+      <a href="/podcast/{{ podcast.id }}" matListItemIcon><img  src="{{
+        podcast.imageUrl }}" /></a>
+      <span matListItemTitle><a href="/podcast/{{ podcast.id }}">{{ podcast.title }}</a></span>
+    {{ podcast.description }}
+  </mat-list-item>
+}
+</mat-list>
+</div>

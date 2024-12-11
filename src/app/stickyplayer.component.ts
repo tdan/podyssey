@@ -8,7 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { StreamEpisodeService } from './core/services/streamepisode.service';
 import { Subscription } from 'rxjs';
 import { StreamState } from './core/models/stream-state.interface';
-import { EpisodeTimeFormatPipe } from "./episodetimeformat.pipe";
+import { EpisodeTimeFormatPipe } from "./shared/episodetimeformat.pipe";
 import { FormsModule } from '@angular/forms';
 
 const modules = [

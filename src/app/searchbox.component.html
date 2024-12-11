@@ -1,0 +1,8 @@
+<div>
+  <mat-form-field appearance="outline">
+    <input matInput type="text" #query placeholder="Search podcasts...">
+  </mat-form-field>
+  <button mat-fab extended (click)="searchPodcastByTerm(query.value)">
+    <mat-icon>search</mat-icon>
+  </button>
+</div>
