@@ -14,4 +14,12 @@ export class Feed {
     this.url = url
     this.imageUrl = image;
   }
+
+  public toJson(): string {
+    let json = `{
+      "id": ${this.id},"guid": ${this.guid},"title": ${this.title},"description": ${this.description},"url": ${this.url},"imageUrl": ${this.imageUrl};
+    }`;
+
+    return json;
+  }
 }

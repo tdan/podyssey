@@ -5,7 +5,7 @@ import { Episode } from '../models/episode.model';
 import { Podcast } from '../models/podcast.model'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import PodcastIndexClient from "podcastdx-client";
+// import PodcastIndexClient from "podcastdx-client";
 import { process } from "../../../environments/environment";
 
 const API_URL: string = process?.env['PODCAST_IDX_API_URL'] ?? "";

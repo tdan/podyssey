@@ -3,9 +3,13 @@ import { PodcastIndexService } from '../app/core/services/podcastindex.service';
 import { Episode } from './core/models/episode.model';
 import { StreamEpisodeService } from "./core/services/streamepisode.service";
 import { MatListModule } from "@angular/material/list";
+import { MatIconModule } from "@angular/material/icon";
+import { MatPaginatorModule, PageEvent } from "@angular/material/paginator";
 
 const MatModules = [
   MatListModule,
+  MatIconModule,
+  MatPaginatorModule,
 ];
 
 @Component({

@@ -18,4 +18,11 @@ export class Podcast extends Feed {
     this.author = author;
     this.website = homeLink;
   }
+
+  public override toJson(): string {
+    let json = super.toJson();
+    json += `{"author": ${this.author},"website": ${this.website}}`;
+
+    return json;
+  }
 }
