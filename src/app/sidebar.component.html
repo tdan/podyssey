@@ -1,0 +1,110 @@
+<button type="button" class="btn btn-text max-sm:btn-square sm:hidden"
+  aria-haspopup="dialog" aria-expanded="false" aria-controls="default-sidebar"
+  data-overlay="#default-sidebar">
+  <span class="icon-[tabler--menu-2] size-5"></span>
+</button>
+
+<aside id="multilevel-with-separator" class="overlay sm:shadow-none overlay-open:translate-x-0 drawer drawer-start hidden max-w-64 sm:absolute sm:z-0 sm:flex sm:translate-x-0 sm:z-0" tabindex="-1" >
+  <div class="drawer-body px-2 pt-4">
+    <ul class="menu space-y-0.5 [&_.nested-collapse-wrapper]:space-y-0.5 [&_ul]:space-y-0.5 p-0">
+      <li>
+        <a routerLink="/">
+          <span class="icon-[tabler--home] size-5"></span>
+          Home
+        </a>
+      </li>
+      <li class="space-y-0.5">
+        <a class="collapse-toggle collapse-open:bg-base-content/10" id="menu-app" data-collapse="#menu-app-collapse">
+          <span class="icon-[tabler--align-justified] size-5"></span>
+          Queue
+        </a>
+      </li>
+      <li>
+        <a routerLink="#">
+          <span class="icon-[tabler--inbox] size-5"></span>
+          Inbox
+        </a>
+      </li>
+      <li>
+        <a routerLink="/subscriptions" routerLinkActive="active">
+          <span class="icon-[tabler--layout-grid-add] size-5"></span>
+          Subscription
+        </a>
+      </li>
+      <li class="space-y-0.5">
+        <a class>
+          <span class="icon-[tabler--rss] size-5"></span>
+          Episodes
+        </a>
+      </li>
+      <li class="space-y-0.5">
+        <a class>
+          <span class="icon-[tabler--download] size-5"></span>
+          Downloads
+        </a>
+      </li>
+      <li class="space-y-0.5">
+        <a routerLink="/history" routerLinkActive="active">
+          <span class="icon-[tabler--rotate-clockwise] size-5"></span>
+          Playback History
+        </a>
+      </li>
+      <li class="space-y-0.5">
+        <a class>
+          <span class="icon-[tabler--plus] size-5"></span>
+          Add Podcasts
+        </a>
+      </li>
+      <!-- Separator -->
+      <div class="divider text-base-content/50 py-6 after:border-0"></div>
+      <!-- -->
+      @for (podcast of subscribedPodcasts; track podcast) {
+      <li>
+        <a href="{{ podcast.url }}">
+          <img src="{{ podcast.imageUrl }}" />
+          {{ podcast.title }}
+        </a>
+      </li>
+      }
+      <!-- Separator -->
+      <div class="divider text-base-content/50 py-6 after:border-0"></div>
+      <!-- -->
+      <li>
+        <a href="#">
+          <span class="icon-[tabler--settings] size-5"></span>
+          Settings
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <span class="icon-[tabler--logout-2] size-5"></span>
+          Sign Out
+        </a>
+      </li>
+      <!-- Theme picker -->
+      <li>
+        <div class="dropdown relative inline-flex [--auto-close:inside] rtl:[--placement:bottom-end]">
+          <button id="theme-picker" type="button"
+            class="dropdown-toggle btn btn-outline btn-neutral btn-block"
+            aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown" >
+              Theme
+              <span class="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-default" >
+              <li>
+                <input type="radio" name="theme-dropdown"
+                class="theme-controller btn btn-text w-full
+                justify-start" aria-label="Soft" value="default" checked />
+              </li>
+              <li>
+                <input type="radio" name="theme-dropdown" class="theme-controller btn btn-text w-full justify-start" aria-label="Light" value="light" />
+              </li>
+              <li>
+                <input type="radio" name="theme-dropdown" class="theme-controller btn btn-text w-full justify-start" aria-label="Dark" value="dark" />
+              </li>
+            </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</aside>

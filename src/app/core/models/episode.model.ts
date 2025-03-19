@@ -1,22 +1,6 @@
 import { Feed } from './feed.model';
 
-export class Episode extends Feed{
+export interface Episode extends Feed{
   datePublished: string;
   duration: number;
-
-  constructor(
-    id: number,
-    guid: string,
-    title: string,
-    desc: string,
-    datePublished: string,
-    duration:number,
-    url: string,
-    image: string
-  ) {
-    super(id, guid, title, desc, url, image);
-    this.datePublished = datePublished;
-    this.duration = duration;
-  }
-
 }

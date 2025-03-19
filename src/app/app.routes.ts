@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
 import { SinglePodcastDetailComponent } from './singlepodcastdetail.component';
-import { HomeComponent } from './home.component';
-import { UserRegisterComponent } from './user_register.component';
-import { UserLoginComponent } from './user_login.component';
+import { UserSubscriptionsComponent } from './user_subscriptions.component';
+import { UserHistoryComponent } from './user_history.component';
+import { SearchResultDisplayComponent } from './search_result_display.component';
 
 export const routes: Routes = [
-  { path: "podcast/:id", component: SinglePodcastDetailComponent },
-  { path: "register", component: UserRegisterComponent },
-  { path: "login", component: UserLoginComponent },
-  { path: "", component: HomeComponent, },
-  { path: "**", redirectTo: "/", },
+  { path: "podcast/:id", loadComponent: () => SinglePodcastDetailComponent },
+  { path: "subscriptions", loadComponent: () => UserSubscriptionsComponent },
+  { path: "history", loadComponent: () => UserHistoryComponent },
+  { path: "search", loadComponent: () => SearchResultDisplayComponent },
 ];

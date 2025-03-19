@@ -1,0 +1,24 @@
+<div class="episodes-list max-w-full mx-auto px-4">
+  <ul class="mt-12">
+  @for (state of episodeStates; track state) {
+    @if (state.episodeInfo != undefined) {
+    <li class="flex flex-row mb-5">
+      <div class="gap-3 transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md flex flex-1 items-center p-4">
+        <img class="max-h-64 flex-none rounded-full mx-auto" src="{{
+          state.episodeInfo!.imageUrl }}" />
+        <div class="p-5">
+          <h6 class="block font-semibold">{{
+            state.episodeInfo!.title
+            }}</h6>
+          <span class="text-sm overflow-hidden line-clamp-6
+            text-ellipsis"
+            [innerHTML]="state.episodeInfo!.description">
+          </span>
+        </div>
+        <play-episode-button [episode]="state.episodeInfo!"></play-episode-button>
+      </div>
+    </li>
+    }
+  }
+  </ul>
+</div>

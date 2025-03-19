@@ -1,34 +1,120 @@
-<div class="media-footer">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      {{ slider.value | episodeTimeFormat }}
-      <mat-slider class="time-slider"
-        min="0"
-        [max]="state.duration"
-        step="1"
+<div class="sticky-player fixed inset-x-0 bottom-0 pb-5 bg-base-100">
+  @if (state.episodeInfo != undefined) {
+  <nouislider
+    #progress_slider
+    [start]="state.currentTime"
+    [minRange]="0"
+    [maxRange]="state.episodeInfo!.duration"
+    [step]="1"
+    [cssPrefix]="''"
+    [cssClasses]='{
+      "target": "relative h-2 rounded-full bg-neutral/10 range-slider-disabled:pointer-events-none range-slider-disabled:opacity-50",
+      "base": "size-full relative z-[1]",
+      "origin": "absolute top-0 end-0 rtl:start-0 size-full origin-[0_0] rounded-full",
+      "handle": "hidden",
+      "connects": "relative z-0 w-full h-2 rtl:rounded-e-full rtl:rounded-s-none rounded-s-full overflow-hidden",
+      "connect": "absolute top-0 end-0 rtl:start-0 z-[1] size-full bg-primary origin-[0_0] -translate-y-2/4",
+      "touchArea": "absolute -top-1 -bottom-1 -start-1 -end-1",
+    }'
+    [(value)]="progress"
+  >
+  </nouislider>
+  }
+
+  <div class="flex flex-row row-span-full mt-5 items-center">
+    <!-- Buttons & Timing Info -->
+    <div class="play-control flex flex-row items-center basis-1/4 justify-start">
+      <button class="btn btn-text btn-primary"
+        aria-label="Rewind 10s"
+        (click)="seek(-10)"
       >
-        <input matSliderThumb [(ngModel)]="state.currentTime"
-          (dragEnd)="seekTo(slider.value)" #slider>
-      </mat-slider>
-      {{ state.duration | episodeTimeFormat }}
-    </mat-toolbar-row>
-    <mat-toolbar-row class="media-action-bar">
-      <button mat-button (click)="seek(-10)">
-        <mat-icon mat-list-icon>replay_10</mat-icon>
+        <span class="icon-[tabler--rewind-backward-10] size-8"></span>
       </button>
+
       @if (!state.playing) {
-        <button mat-button (click)="play()">
-          <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+        <button class="btn btn-text btn-primary"
+          aria-label="Play"
+          (click)="play()"
+        >
+          <span class="icon-[tabler--player-play-filled] size-10"></span>
         </button>
       }
       @else {
-        <button mat-button (click)="pause()">
-          <mat-icon mat-list-icon>pause</mat-icon>
+        <button class="btn btn-text btn-outline"
+          aria-label="Pause"
+          (click)="pause()"
+        >
+          <span class="icon-[tabler--player-pause-filled] size-10"></span>
         </button>
       }
-      <button  mat-button (click)="seek(30)">
-        <mat-icon mat-list-icon>forward_30</mat-icon>
+
+      <button class="btn btn-text btn-primary p-1"
+        aria-label="Forward 30s"
+        (click)="seek(30)"
+      >
+        <span class="icon-[tabler--rewind-forward-30] size-8"></span>
       </button>
-    </mat-toolbar-row>
-  </mat-toolbar>
+
+      @if (state.episodeInfo != undefined) {
+      <div class="text-base ml-4">
+        {{ state.currentTime | episodeTimeFormat }} / {{ state.episodeInfo!.duration | episodeTimeFormat }}
+      </div>
+      }
+    </div>
+
+    <!-- Episode Info -->
+    <div class="ep-info flex flex-row basis-1/2 jusify-center items-center">
+    @if (state.episodeInfo) {
+      <div class="ep-img">
+        <img class="max-h-24 w-full object-cover" src="{{ state.episodeInfo!.imageUrl }}" />
+      </div>
+      <div class="ep-info-text flex flex-col ml-8">
+        <h5 class="font-semibold">{{ state.episodeInfo!.title }}</h5>
+        <span class="overflow-hidden line-clamp-1 text-ellipsis"
+          [innerHTML]="state.episodeInfo!.description">
+        </span>
+      </div>
+    }
+    </div>
+
+    <!-- Volume Control -->
+    <div class="vol-control flex flex-row basis-1/4 items-center justify-center">
+      <button class="btn btn-text btn-primary"
+        aria-label="Mute/Unmute"
+        (click)="toggleMute()"
+      >
+        @if (!state.muted) {
+          <span class="icon-[tabler--volume] size-8"></span>
+        }
+        @else {
+          <span class="icon-[tabler--volume-off] size-8"></span>
+        }
+      </button>
+
+      <!-- Volume Slider -->
+      <div class="w-36 ml-5">
+        <nouislider
+          #volume_slider
+          [start]="state.volume"
+          [minRange]="0.0"
+          [maxRange]="1.00"
+          [step]="0.10"
+          [cssPrefix]="''"
+          [cssClasses]='{
+            "target": "relative h-2 rounded-full bg-neutral/10",
+            "base": "size-full relative z-[1]",
+            "origin": "absolute top-0 end-0 rtl:start-0 size-full origin-[0_0] rounded-full",
+            "handle": "absolute top-1/2 end-0 rtl:start-0 size-4 bg-base-100 border-[3px] border-primary rounded-full translate-x-2/4 -translate-y-2/4 hover:cursor-grab active:cursor-grabbing hover:ring-2 ring-primary active:ring-[3px]",
+            "connects": "relative z-0 w-full h-2 rtl:rounded-e-full rtl:rounded-s-none rounded-s-full overflow-hidden",
+            "connect": "absolute top-0 end-0 rtl:start-0 z-[1] size-full bg-primary origin-[0_0]  -translate-y-2/4",
+            "touchArea": "absolute -top-1 -bottom-1 -start-1 -end-1"
+          }'
+          [(value)]="volume"
+        >
+        </nouislider>
+      </div>
+    </div>
+
+  </div>
+
 </div>

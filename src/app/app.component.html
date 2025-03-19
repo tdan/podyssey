@@ -1,5 +1,10 @@
-<section class="container flex flex-col items-center justify-center w-full
-  mx-auto bg-slate-100">
-  <router-outlet></router-outlet>
-</section>
+<div class="flex flex-row">
+  <div class="basis-1/6">
+    <side-bar></side-bar>
+  </div>
+  <div class="basis-4/6 flex flex-col items-center justify-center mx-auto">
+    <search-box></search-box>
+    <router-outlet></router-outlet>
+  </div>
+</div>
 <sticky-player></sticky-player>

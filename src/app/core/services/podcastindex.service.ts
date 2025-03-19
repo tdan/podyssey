@@ -6,11 +6,11 @@ import { Podcast } from '../models/podcast.model'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 // import PodcastIndexClient from "podcastdx-client";
-import { process } from "../../../environments/environment";
+import { env } from "../../../environments/environment";
 
-const API_URL: string = process?.env['PODCAST_IDX_API_URL'] ?? "";
-const API_KEY: string = process?.env['PODCAST_IDX_API_KEY'] ?? "";
-const API_SECRET: string = process?.env['PODCAST_IDX_API_SECRET'] ?? "";
+const API_URL: string = env['PODCAST_IDX_API_URL'];
+const API_KEY: string = env['PODCAST_IDX_API_KEY'];
+const API_SECRET: string = env['PODCAST_IDX_API_SECRET'];
 
 @Injectable({
   providedIn: 'root',
@@ -50,19 +50,18 @@ export class PodcastIndexService {
 
     return response$.pipe(
       map(data => {
-        console.log(data);
         let episodesList: Episode[] = [];
         data.items.forEach(item => {
-          episodesList.push(new Episode(
-            item.id,
-            item.guid,
-            item.title,
-            item.description,
-            item.datePublishedPretty,
-            item.duration,
-            item.enclosureUrl,
-            item.feedImage,
-          ));
+          episodesList.push({
+            id: item.id,
+            guid: item.guid,
+            title: item.title,
+            description: item.description,
+            datePublished: item.datePublishedPretty,
+            duration: item.duration,
+            url: item.enclosureUrl,
+            imageUrl: item.feedImage,
+          } as Episode);
         });
         return episodesList;
       })
@@ -84,16 +83,16 @@ export class PodcastIndexService {
       get(API_URL + '/episodes/byid?id=' + id + '&pretty', {headers:authHeaders});
 
     return response$.pipe(map(data => {
-      return new Episode(
-        data.episode.id,
-        data.episode.guid,
-        data.episode.title,
-        data.episode.description,
-        data.episode.datePublishedPretty,
-        data.episode.duration,
-        data.episode.enclosureUrl,
-        data.episode.feedImage
-      );
+      return {
+        id: data.episode.id,
+        guid: data.episode.guid,
+        title: data.episode.title,
+        description: data.episode.description,
+        datePublished: data.episode.datePublishedPretty,
+        duration: data.episode.duration,
+        url: data.episode.enclosureUrl,
+        imageUrl: data.episode.feedImage,
+      } as Episode;
     }));
   }
 
@@ -114,16 +113,15 @@ export class PodcastIndexService {
       map(data => {
         let podcastList: Podcast[] = [];
         data.feeds.forEach(feed => {
-          podcastList.push(new Podcast(
-            feed.id,
-            feed.guid,
-            feed.title,
-            feed.author,
-            feed.description,
-            feed.link,
-            feed.link,
-            feed.image,
-          ));
+          podcastList.push({
+            id: feed.id,
+            guid: feed.guid,
+            title: feed.title,
+            author: feed.author,
+            description: feed.description,
+            url: feed.link,
+            imageUrl: feed.image,
+          } as Podcast);
         });
         return podcastList;
       })

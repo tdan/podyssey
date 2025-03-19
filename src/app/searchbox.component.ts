@@ -4,7 +4,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { PodcastIndexService } from "./core/services/podcastindex.service";
+import { Router } from "@angular/router";
 
 const modules = [
   MatButtonModule,
@@ -24,11 +24,12 @@ const modules = [
 export class SearchBoxComponent {
   @Output() searchResults = new EventEmitter<any[]>();
 
-  constructor(private podcastIndexAPI: PodcastIndexService) {}
+  constructor(private router: Router) {}
 
-  public searchPodcastByTerm(query: string): any {
-    this.podcastIndexAPI.getPodcastsbyTerm(query).subscribe((feeds) => {
-      this.searchResults.emit(feeds);
-    });
+  public onSearchButtonClicked(query: string) {
+    this.router.navigate(
+      ['/search'],
+      { queryParams: { term: query }}
+    );
   }
 }

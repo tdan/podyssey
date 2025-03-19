@@ -1,21 +1,21 @@
-<div class="podcasts-list max-w-2xl mx-auto px-4">
-  <ul role="list" class="mt-12 divide-y">
+<div class="podcasts-list max-w-full mx-auto px-4">
+  <ul role="list" class="mt-12">
   @for (podcast of podcasts; track podcast) {
-      <li class="flex justify-between items-start py-5">
-        <a href="/podcast/{{ podcast.id }}">
-          <div class="gap-3 transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center p-4">
-            <img class="w-12 h-12 flex-none rounded-full bg-gray-50"
+      <li class="flex justify-between items-start mb-5">
+        <a routerLink="/podcast/{{ podcast.id }}">
+          <div class="gap-3 transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md flex flex-1 items-center p-4">
+            <img class="max-h-64 flex-none rounded-full mx-auto"
               src="{{ podcast.imageUrl }}" />
             <div>
-              <h6 class="block text-sm text-gray-700 font-semibold"><a
-              href="/podcast/{{ podcast.id }}">{{ podcast.title }}</a></h6>
-              <span class="block text-sm text-gray-600">{{ podcast.description }}</span>
+              <h6 class="block font-semibold">{{ podcast.title }}</h6>
+              <span class="text-sm overflow-hidden line-clamp-6
+              text-ellipsis">{{ podcast.description }}</span>
             </div>
-            <a href="javascript:void(0)" class="text-gray-700 text-sm border
-            rounded-lg px-3 py-2 duration-150 bg-white
-            hover:bg-gray-100">Subcribe</a>
           </div>
         </a>
+        <subscribe-podcast-button
+          [podcast]="podcast">
+        </subscribe-podcast-button>
       </li>
   }
   </ul>

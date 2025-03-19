@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { PodcastIndexService } from '../app/core/services/podcastindex.service';
-import { Episode } from './core/models/episode.model';
-import { StreamEpisodeService } from "./core/services/streamepisode.service";
 import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
-import { MatPaginatorModule, PageEvent } from "@angular/material/paginator";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { PlayEpisodeButtonComponent } from "./play_episode_button.component";
+import { Episode } from "./core/models/episode.model";
 
 const MatModules = [
   MatListModule,
@@ -17,23 +16,14 @@ const MatModules = [
   selector: 'episodes-list',
   templateUrl: './episodeslist.component.html',
   styleUrls: ['./episodeslist.component.css'],
-  imports: [MatModules],
+  imports: [MatModules, PlayEpisodeButtonComponent],
 })
 export class EpisodesListComponent implements OnInit {
   @Input() episodes: Episode[];
 
-  constructor(
-    private podcastAPI: PodcastIndexService,
-    private streamEpisodeService: StreamEpisodeService
-  ) {
+  constructor() {
     this.episodes = [];
   }
 
   public ngOnInit(): void {}
-
-  public onEpisodeSelected(ep: Episode) {
-    this.podcastAPI.getEpisodeById(ep.id).subscribe((episode: Episode) => {
-      this.streamEpisodeService.startStream(episode).subscribe(events => {});
-    });
-  }
 }

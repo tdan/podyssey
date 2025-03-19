@@ -1,22 +1,24 @@
-<div class="episodes-list max-w-2xl mx-auto px-4">
-  <ul class="mt-12 divide-y">
-  @for (eps of episodes; track eps) {
-    <li class="flex flex-row mb-2 border-gray-400">
-      <div class="bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center p-4">
-        <img class="w-24 h-24 flex-none rounded-full bg-gray-50 mx-auto" src="{{ eps.imageUrl }}" />
-        <div>
-          <h6 class="block text-sm text-gray-700 font-semibold">{{ eps.title
+<div class="episodes-list max-w-full mx-auto px-4">
+  <ul class="mt-12">
+  @for (ep of episodes; track ep) {
+    @if (ep != undefined) {
+    <li class="flex flex-row mb-5">
+      <div class="gap-3 transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md flex flex-1 items-center p-4">
+        <img class="max-h-64 flex-none rounded-full mx-auto" src="{{
+          ep!.imageUrl }}" />
+        <div class="p-5">
+          <h6 class="block text-sm font-semibold">{{
+            ep!.title
             }}</h6>
-          <span class="block text-sm text-gray-600"
-            [innerHTML]="eps.description">
+          <span class="text-sm overfollow-hidden line-clamp-6
+            text-ellipsis"
+            [innerHTML]="ep!.description">
           </span>
         </div>
-        <button (click)="onEpisodeSelected(eps)" class="py-2 px-4 flex justify-center items-center w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-          <mat-icon>play_circle_outlined</mat-icon>
-          Play
-        </button>
+        <play-episode-button [episode]="ep!"></play-episode-button>
       </div>
     </li>
+    }
   }
   </ul>
 </div>

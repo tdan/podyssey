@@ -1,17 +1,35 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { StickyPlayerComponent } from './stickyplayer.component';
-import { HomeComponent } from './home.component';
-import { UserRegisterComponent } from './user_register.component';
-import { UserLoginComponent } from './user_login.component';
+import { SidebarComponent } from './sidebar.component';
+import { SearchBoxComponent } from './searchbox.component';
+
+import { IStaticMethods } from 'flyonui/flyonui';
+declare global {
+  interface Window {
+    HSStaticMethods: IStaticMethods;
+  }
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, StickyPlayerComponent, UserRegisterComponent, UserLoginComponent ],
+  imports: [RouterOutlet, StickyPlayerComponent, SidebarComponent, SearchBoxComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'AntennaPod Web';
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        setTimeout(() => {
+          window.HSStaticMethods.autoInit();
+        }, 100);
+      }
+    });
+  }
 }

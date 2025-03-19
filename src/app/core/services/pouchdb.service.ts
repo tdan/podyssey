@@ -1,15 +1,13 @@
 import { Injectable } from "@angular/core";
 import PouchDB from "pouchdb";
 import { DBService } from "./db.service";
-import { UserProfile } from "../models/userprofile.model";
+import { UserData, UserProfile } from "../models/userprofile.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class PouchDBService extends DBService{
-  getByAuthToken(authToken: string): UserProfile {
-      throw new Error("Method not implemented.");
-  }
+
   private db: PouchDB.Database;
 
   constructor() {
@@ -17,18 +15,21 @@ export class PouchDBService extends DBService{
     this.db = new PouchDB("antenapod-web");
   }
 
-  public put(jsonObj: any): boolean {
-    let success: boolean = false;
+
+  public async create(jsonObj: any): Promise<string> {
+    let rev: string = "";
 
     console.log(jsonObj);
-    this.db.put(jsonObj).then( response => {
-      success = true;
-    }).catch(error => {
-      console.log(error);
-    });
+    try{
+      let response = await this.db.post(jsonObj);
+      rev = response.rev;
+    } catch(error) {
+      console.log("[PouchDB.create()]", error as Error);
+    };
 
-    return success;
+    return rev;
   }
+
 
   public async getById(id: string): Promise<UserProfile | null> {
     let obj = null;
@@ -42,13 +43,49 @@ export class PouchDBService extends DBService{
     return obj;
   }
 
+
+  public getByAuthToken(authToken: string): UserProfile {
+      throw new Error("Method not implemented.");
+  }
+
+
+  public async getAll(): Promise<any> {
+    let result = {};
+
+    try {
+      result = await this.db.allDocs({
+        include_docs: true,
+      });
+    } catch(error) {
+      console.log("[PouchDB.getAll()]", error as Error);
+    }
+
+    return result;
+  }
+
+
+  public async update(jsonObj: any): Promise<string> {
+    let rev: string = "";
+
+    try {
+     let response = await this.db.put(jsonObj);
+      rev = response.rev;
+    } catch(error) {
+      console.log("[LocalUser.update]", error as Error);
+    };
+
+    return rev;
+  }
+
+
   public remove(id: string) {
     this.db.get(id).then(obj => {
-      return this.db.remove(obj);
+      this.db.remove(obj);
     }).catch(error => {
       console.log(error);
     })
   }
+
 
   public destroy(): boolean {
     let success: boolean = false;

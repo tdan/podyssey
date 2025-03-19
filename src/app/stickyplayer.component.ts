@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild, effect, signal } from '@angular/core';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,11 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { StreamEpisodeService } from './core/services/streamepisode.service';
 import { Subscription } from 'rxjs';
-import { StreamState } from './core/models/stream-state.interface';
 import { EpisodeTimeFormatPipe } from "./shared/episodetimeformat.pipe";
 import { FormsModule } from '@angular/forms';
+import { EpisodeState } from './core/models/episode_state.interface';
 
-const modules = [
+import { NoUiSliderComponent } from './nouislider.component';
+
+
+const MatModules = [
   MatButtonModule,
   MatToolbarModule,
   MatSliderModule,
@@ -20,35 +23,61 @@ const modules = [
   FormsModule,
 ];
 
+
+
 @Component({
   selector: 'sticky-player',
   standalone: true,
   templateUrl: './stickyplayer.component.html',
   styleUrl: './stickyplayer.component.css',
-  imports: [modules, EpisodeTimeFormatPipe],
+  imports: [MatModules, EpisodeTimeFormatPipe, NoUiSliderComponent],
   providers: [EpisodeTimeFormatPipe],
 })
 export class StickyPlayerComponent implements OnDestroy {
-  public state: StreamState = {
-    playing: false,
-    currentTime: 0,
-    readableCurrentTime: "",
-    duration: 0,
-    readableDuration: "",
-    isPlayable: false,
-  };
-
-  public sliderValue = this.state.currentTime;
-  public sliderMax = this.state.duration;
+  public state: EpisodeState;
 
   private streamObserver: Subscription;
 
-  constructor(private streamEpisodeService: StreamEpisodeService) {
-    this.streamObserver = streamEpisodeService.getState().subscribe((value) => {
-      this.state = value;
-      // this.sliderValue = this.state.currentTime;
-      // this.sliderMax = this.state.duration;
-    });
+  @ViewChild("progress_slider", { read: NoUiSliderComponent})
+  private progressSlider!: NoUiSliderComponent;
+
+  public progress = signal<number>(0);
+  public volume = signal<number>(0);
+
+  constructor(
+    private streamEpisodeService: StreamEpisodeService,
+  ) {
+
+    this.state = this.streamEpisodeService.defaultState();
+
+    this.streamObserver = streamEpisodeService.getState().subscribe(
+      (value) => {
+        this.state = value;
+
+        let sliderTimerInSeconds = Math.floor(this.progressSlider.get());
+        let currentTimeInSeconds = Math.floor(this.state.currentTime);
+
+        if (sliderTimerInSeconds != currentTimeInSeconds) {
+          this.progressSlider.set(currentTimeInSeconds, false, true);
+        }
+      }
+    );
+
+    /**
+     * Registering signals for updates
+     * Everytime the slider change value it will notify effect()
+     *
+     **/
+    // volume slider
+    effect(() => {
+      this.setVolume(this.volume());
+    })
+
+    // stream progress slider
+    effect(() => {
+      this.seekTo(this.progress());
+    })
+
   }
 
   public ngOnDestroy(): void {
@@ -59,14 +88,10 @@ export class StickyPlayerComponent implements OnDestroy {
 
   public play() {
     this.streamEpisodeService.play();
-    console.log("[StickyPlayerComponent.play]")
-    console.log(this.state);
   }
 
   public pause() {
     this.streamEpisodeService.pause();
-    console.log("[StickyPlayerComponent.pause]")
-    console.log(this.state);
   }
 
   public seek(seconds: number) {
@@ -76,5 +101,13 @@ export class StickyPlayerComponent implements OnDestroy {
   public seekTo(value: number | string) {
     const destinationTimeInSeconds = Number(value);
     this.streamEpisodeService.seekTo(destinationTimeInSeconds);
+  }
+
+  public toggleMute() {
+    this.streamEpisodeService.toggleMute();
+  }
+
+  private setVolume(vol: number) {
+    this.streamEpisodeService.setVolume(vol);
   }
 }
