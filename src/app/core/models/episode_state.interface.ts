@@ -7,6 +7,7 @@ export interface EpisodeState {
   readableCurrentTime: string;
   readableDuration: string;
   isPlayable: boolean;
+  loading: boolean;
   muted: boolean;
   volume: number;
 }

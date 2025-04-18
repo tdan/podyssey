@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AntennaPod-web": {
+    "podyssey": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/antenna-pod-web",
+            "outputPath": "dist/podyssey",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -83,10 +83,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "AntennaPod-web:build:production"
+              "buildTarget": "podyssey:build:production"
             },
             "development": {
-              "buildTarget": "AntennaPod-web:build:development"
+              "buildTarget": "podyssey:build:development"
             }
           },
           "defaultConfiguration": "development"

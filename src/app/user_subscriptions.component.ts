@@ -18,7 +18,9 @@ export class UserSubscriptionsComponent implements OnInit {
   constructor(private localUserController: LocalUserController) {}
 
   public async ngOnInit() {
-    let user:UserProfile = await this.localUserController.getLocalUser();
-    this.subscriptionList = user.favoritePodcasts;
+    let user:UserProfile | undefined = await this.localUserController.getLocalUser();
+
+    if (user != undefined)
+      this.subscriptionList = user!.favoritePodcasts;
   }
 }

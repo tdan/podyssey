@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'AntennaPod-web' title`, () => {
+  it(`should have the 'Podyssey' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('AntennaPod-web');
+    expect(app.title).toEqual('Podyssey');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, AntennaPod-web');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, Podyssey');
   });
 });

@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 /* @import "~@angular/material/prebuilt-themes/rose-red.css"; */
 /* @import "tailwindcss"; */
+/* @plugin "flyonui"; */
+/* @import "flyonui/variants.css"; */
+/* @source "../node_modules/flyonui/flyonui.js"; */
 
 @tailwind base;
 @tailwind components;

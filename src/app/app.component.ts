@@ -5,6 +5,8 @@ import { SidebarComponent } from './sidebar.component';
 import { SearchBoxComponent } from './searchbox.component';
 
 import { IStaticMethods } from 'flyonui/flyonui';
+import { LocalUserController } from './core/controllers/localuser.controller';
+import { HomepageComponent } from './homepage.component';
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -14,14 +16,17 @@ declare global {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, StickyPlayerComponent, SidebarComponent, SearchBoxComponent],
+  imports: [RouterOutlet, StickyPlayerComponent, SidebarComponent, SearchBoxComponent, HomepageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'AntennaPod Web';
+  title = 'Podyssey';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private userController: LocalUserController
+  ) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
@@ -31,5 +36,16 @@ export class AppComponent {
         }, 100);
       }
     });
+
+    // initialize user
+    this.userController.getLocalUser()
+      .then((user) => {
+        console.log("[AppComponent]", user);
+        if (user === undefined || user._id == "")
+          this.userController.createLocalUser();
+      })
+      .catch((error) => {
+        console.log(error as Error);
+      })
   }
 }

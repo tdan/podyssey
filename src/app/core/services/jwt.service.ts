@@ -5,15 +5,15 @@ import { Injectable } from "@angular/core";
 })
 export class JwtService {
   public getToken(): string {
-    return window.localStorage["AntennaWebToken"]
+    return window.localStorage["PodysseyToken"]
   }
 
   public saveToken(token: string): void {
-    window.localStorage["AntennaWebToken"] = token;
+    window.localStorage["PodysseyToken"] = token;
     console.log(window);
   }
 
   public destroyToken(): void {
-    window.localStorage.removeItem("AntennaWebToken");
+    window.localStorage.removeItem("PodysseyToken");
   }
 }

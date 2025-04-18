@@ -21,14 +21,16 @@ export class PodcastIndexService {
    ** error with mixpanel.js
    **/
   // private client:PodcastIndexClient;
+  private authHeaders: HttpHeaders;
 
-  public constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.authHeaders = this.prepareAuthHeaders();
+  }
 
   public getRecentEpisodes(max: number = 7): Observable<any> {
-    let authHeaders: HttpHeaders = this.prepareAuthHeaders();
 
     let response$: Observable<any> = this.httpClient.
-      get(API_URL + '/recent/episodes?max=' + max, {headers: authHeaders});
+      get(API_URL + '/recent/episodes?max=' + max, {headers: this.authHeaders});
 
     return response$.pipe(map(data => {
       return data.items;
@@ -43,10 +45,9 @@ export class PodcastIndexService {
    *
    */
   public getEpisodesInPodcast(feedID: number): Observable<Episode[]> {
-    let authHeaders: HttpHeaders = this.prepareAuthHeaders();
 
     let response$: Observable<any> = this.httpClient.
-      get(API_URL + '/episodes/byfeedid?id=' + feedID + '&pretty', {headers:authHeaders});
+      get(API_URL + '/episodes/byfeedid?id=' + feedID + '&pretty', {headers: this.authHeaders});
 
     return response$.pipe(
       map(data => {
@@ -76,11 +77,9 @@ export class PodcastIndexService {
    *
    */
   public getEpisodeById(id: number): Observable<Episode> {
-    let authHeaders: HttpHeaders = this.prepareAuthHeaders();
-
 
     let response$: Observable<any> = this.httpClient.
-      get(API_URL + '/episodes/byid?id=' + id + '&pretty', {headers:authHeaders});
+      get(API_URL + '/episodes/byid?id=' + id + '&pretty', {headers: this.authHeaders});
 
     return response$.pipe(map(data => {
       return {
@@ -104,10 +103,9 @@ export class PodcastIndexService {
    *
    */
   public getPodcastsbyTerm(query: string): Observable<Podcast[]> {
-    let authHeaders: HttpHeaders = this.prepareAuthHeaders();
 
     let response$: Observable<any> = this.httpClient.
-      get(API_URL + "/search/byterm?q=" + query + "&pretty", {headers: authHeaders});
+      get(API_URL + "/search/byterm?q=" + query + "&pretty", {headers: this.authHeaders});
 
     return response$.pipe(
       map(data => {
@@ -128,13 +126,43 @@ export class PodcastIndexService {
     );
   }
 
+  /**
+   * @param [max=10] Maximum number of result to returns. Default = 10
+   * @return the podcasts/feeds that in the index that are trending.
+   */
+  public getTrendingPodcasts(max: number = 10): Observable<Podcast[]> {
+
+    let response$: Observable<any> = this.httpClient.
+      get(API_URL + "/podcasts/trending?max=" + max + "&pretty", { headers: this.authHeaders });
+
+    return response$.pipe(
+      map(data => {
+        let podcastList: Podcast[] = [];
+        data.feeds.forEach(feed => {
+          podcastList.push({
+            id: feed.id,
+            guid: feed.guid,
+            title: feed.title,
+            author: feed.author,
+            description: feed.description,
+            url: feed.link,
+            imageUrl: feed.image,
+          } as Podcast);
+        });
+        return podcastList;
+      }),
+    );
+
+  }
+
+
   private prepareAuthHeaders(): HttpHeaders {
     let epochHeaderTime = Math.floor(Date.now() / 1000);
 
     let hashAuthToken = CryptoJS.SHA1(API_KEY + API_SECRET + epochHeaderTime).toString();
 
     return new HttpHeaders().
-      set('User-Agent', 'antennapod-web').
+      set('User-Agent', 'podyssey').
       set('X-Auth-Key', API_KEY).
       set('X-Auth-Date', epochHeaderTime.toString()).
       set('Authorization', hashAuthToken);

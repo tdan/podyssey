@@ -12,7 +12,7 @@ export class PouchDBService extends DBService{
 
   constructor() {
     super();
-    this.db = new PouchDB("antenapod-web");
+    this.db = new PouchDB("podyssey-db");
   }
 
 
@@ -29,25 +29,6 @@ export class PouchDBService extends DBService{
 
     return rev;
   }
-
-
-  public async getById(id: string): Promise<UserProfile | null> {
-    let obj = null;
-
-    try{
-      obj = await this.db.get(id);
-    } catch(error) {
-      console.log(error);
-    }
-
-    return obj;
-  }
-
-
-  public getByAuthToken(authToken: string): UserProfile {
-      throw new Error("Method not implemented.");
-  }
-
 
   public async getAll(): Promise<any> {
     let result = {};

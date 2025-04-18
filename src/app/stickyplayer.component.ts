@@ -1,28 +1,10 @@
-import { Component, ElementRef, OnDestroy, ViewChild, effect, signal } from '@angular/core';
-
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import { Component, OnDestroy, ViewChild, effect, signal } from '@angular/core';
 import { StreamEpisodeService } from './core/services/streamepisode.service';
 import { Subscription } from 'rxjs';
 import { EpisodeTimeFormatPipe } from "./shared/episodetimeformat.pipe";
-import { FormsModule } from '@angular/forms';
 import { EpisodeState } from './core/models/episode_state.interface';
 
 import { NoUiSliderComponent } from './nouislider.component';
-
-
-const MatModules = [
-  MatButtonModule,
-  MatToolbarModule,
-  MatSliderModule,
-  MatIconModule,
-  MatListModule,
-  FormsModule,
-];
-
 
 
 @Component({
@@ -30,7 +12,7 @@ const MatModules = [
   standalone: true,
   templateUrl: './stickyplayer.component.html',
   styleUrl: './stickyplayer.component.css',
-  imports: [MatModules, EpisodeTimeFormatPipe, NoUiSliderComponent],
+  imports: [EpisodeTimeFormatPipe, NoUiSliderComponent],
   providers: [EpisodeTimeFormatPipe],
 })
 export class StickyPlayerComponent implements OnDestroy {

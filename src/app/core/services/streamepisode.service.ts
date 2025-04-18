@@ -26,8 +26,8 @@ const audioEvents = [
   providedIn: 'root'
 })
 export class StreamEpisodeService {
-  private audioObj;
-  private state;
+  private audioObj: HTMLAudioElement;
+  private state: EpisodeState;
   private stateChange: BehaviorSubject<EpisodeState>;
   private streamStop: Subject<boolean>;
 
@@ -94,6 +94,7 @@ export class StreamEpisodeService {
       duration: 0,
       readableDuration: "",
       isPlayable: false,
+      loading: false,
       muted: false,
       volume: 1.0,
     } as EpisodeState;
@@ -146,8 +147,8 @@ export class StreamEpisodeService {
   private updateStateEvents(event: Event) {
     switch (event.type) {
       case "canplay":
-        this.state.duration = this.audioObj.duration;
         this.state.isPlayable = true;
+        this.state.loading = false;
         break;
       case "playing":
         this.state.playing = true;
@@ -160,6 +161,9 @@ export class StreamEpisodeService {
         break;
       case "volumechange":
         this.state.volume = this.audioObj.volume;
+        break;
+      case "loadstart":
+        this.state.loading = true;
         break;
       case "error":
         this.resetState();

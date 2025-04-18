@@ -18,7 +18,9 @@ export class UserHistoryComponent implements OnInit {
   constructor(private localUserController: LocalUserController) {}
 
   public async ngOnInit() {
-    let user:UserProfile = await this.localUserController.getLocalUser();
-    this.playbackHistory = user.playbackHistory.reverse();
+    let user:UserProfile | undefined = await this.localUserController.getLocalUser();
+
+    if (user != undefined)
+      this.playbackHistory = user!.playbackHistory.reverse();
   }
 }

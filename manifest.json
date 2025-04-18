@@ -1,6 +1,6 @@
 {
-  "short_name": "AntennaPod Web",
-  "name": "AntennaPod",
+  "short_name": "Oddyssey",
+  "name": "Oddyssey",
   "icons": [
     {
 
@@ -10,5 +10,5 @@
   "start_url": "/?source=pwa",
   "background_color": "#fff",
   "display": "standalone",
-  "description": "Podcast App",
+  "description": "Local-first, Distributed Podcast App",
 }

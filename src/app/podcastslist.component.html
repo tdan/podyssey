@@ -11,11 +11,11 @@
               <span class="text-sm overflow-hidden line-clamp-6
               text-ellipsis">{{ podcast.description }}</span>
             </div>
+            <subscribe-podcast-button
+              [podcast]="podcast">
+            </subscribe-podcast-button>
           </div>
         </a>
-        <subscribe-podcast-button
-          [podcast]="podcast">
-        </subscribe-podcast-button>
       </li>
   }
   </ul>

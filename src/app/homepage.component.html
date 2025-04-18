@@ -1,0 +1,52 @@
+<div class="flex w-full flex-wrap" id="trending">
+  <h3>Trending</h3>
+  <div
+    id="draggable"
+    data-carousel='{ "loadingClasses": "opacity-0","slidesQty": { "xs": 1, "lg":
+    5 }, "isDraggable": true }'
+    class=""
+  >
+    <div class="carousel h-80">
+      <div class="carousel-body h-full carousel-dragging:transition-none
+        carousel-dragging:cursor-grabbing cursor-grab opacity-0">
+      @for (podcast of trending; track podcast) {
+        <div class="carousel-slide">
+          <div class="card mx-2 transition duration-500 shadow ease-in-out transform
+            hover:translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md">
+            <a routerLink="/podcast/{{ podcast.id }}">
+              <!-- <figure><img src="{{ podcast.imageUrl }}" alt="podcast-image" -->
+                <!-- class="size-full object-cover">/></figure> -->
+              <div class="card-body">
+                <h6 class="card-title mb-2.5">{{ podcast.title }}</h6>
+                <!-- <p>Discover iconic landmarks, world-class museums, and exquisite cuisine. Explore the Eiffel Tower, Louvre Museum, and charming neighborhoods.</p> -->
+              </div>
+              <div class="card-footer">
+                <subscribe-podcast-button
+                  [podcast]="podcast"></subscribe-podcast-button>
+              </div>
+            </a>
+          </div>
+       </div>
+      }
+      </div>
+    </div>
+  </div>
+  <!-- <div class="sm:flex *:not-last:border-e *:not-last:border-base-content/25 max-w-sm sm:max-w-full"> -->
+  <!-- @for (podcast of trending; track podcast) { -->
+  <!--   <div class="card mx-2 transition duration-500 shadow ease-in-out transform -->
+  <!--     hover:translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md"> -->
+  <!--     <a routerLink="/podcast/{{ podcast.id }}"> -->
+  <!--       <figure><img src="{{ podcast.imageUrl }}" alt="podcast-image" /></figure> -->
+  <!--       <div class="card-body"> -->
+  <!--         <h6 class="card-title mb-2.5">{{ podcast.title }}</h6> -->
+  <!--         <!-- <p>Discover iconic landmarks, world-class museums, and exquisite cuisine. Explore the Eiffel Tower, Louvre Museum, and charming neighborhoods.</p> --> -->
+  <!--       </div> -->
+  <!--       <div class="card-footer"> -->
+  <!--         <subscribe-podcast-button -->
+  <!--           [podcast]="podcast"></subscribe-podcast-button> -->
+  <!--       </div> -->
+  <!--     </a> -->
+  <!--   </div> -->
+  <!-- } -->
+  <!-- </div> -->
+</div>

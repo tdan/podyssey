@@ -3,10 +3,12 @@
   @for (ep of episodes; track ep) {
     @if (ep != undefined) {
     <li class="flex flex-row mb-5">
-      <div class="gap-3 transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md flex flex-1 items-center p-4">
+      <div class="gap-3 transition duration-500 shadow ease-in-out transform
+        hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer
+        rounded-md flex flex-1 items-center p-4 grid grid-cols-6 gap-4">
         <img class="max-h-64 flex-none rounded-full mx-auto" src="{{
           ep!.imageUrl }}" />
-        <div class="p-5">
+        <div class="col-span-4">
           <h6 class="block text-sm font-semibold">{{
             ep!.title
             }}</h6>

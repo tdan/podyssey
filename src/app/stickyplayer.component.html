@@ -31,7 +31,12 @@
         <span class="icon-[tabler--rewind-backward-10] size-8"></span>
       </button>
 
-      @if (!state.playing) {
+      @if (state.loading) {
+        <button class="btn btn-text">
+          <span class="loading loading-spinner text-secondary size-10"></span>
+        </button>
+      }
+      @else if (!state.playing) {
         <button class="btn btn-text btn-primary"
           aria-label="Play"
           (click)="play()"
