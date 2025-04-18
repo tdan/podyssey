@@ -6,11 +6,10 @@ import { EpisodeState } from "./core/models/episode_state.interface";
 import { EpisodeStateListComponent } from "./episodestatelist.component";
 
 @Component({
-  selector: "user-history",
-  standalone: true,
-  templateUrl: "./user_history.component.html",
-  styleUrl: "./user_history.component.css",
-  imports: [NgOptimizedImage, EpisodeStateListComponent],
+    selector: "user-history",
+    templateUrl: "./user_history.component.html",
+    styleUrl: "./user_history.component.css",
+    imports: [NgOptimizedImage, EpisodeStateListComponent]
 })
 export class UserHistoryComponent implements OnInit {
   playbackHistory: EpisodeState[] = []

@@ -5,11 +5,10 @@ import { EpisodesListComponent } from "./episodeslist.component";
 import { Episode } from "./core/models/episode.model";
 
 @Component({
-  standalone: true,
-  selector: "single-podcast-detail",
-  templateUrl: "./singlepodcastdetail.component.html",
-  styleUrl: "./singlepodcastdetail.component.css",
-  imports: [EpisodesListComponent],
+    selector: "single-podcast-detail",
+    templateUrl: "./singlepodcastdetail.component.html",
+    styleUrl: "./singlepodcastdetail.component.css",
+    imports: [EpisodesListComponent]
 })
 export class SinglePodcastDetailComponent implements OnInit {
   episodes: Episode[] = [];

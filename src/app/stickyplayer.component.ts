@@ -8,12 +8,11 @@ import { NoUiSliderComponent } from './nouislider.component';
 
 
 @Component({
-  selector: 'sticky-player',
-  standalone: true,
-  templateUrl: './stickyplayer.component.html',
-  styleUrl: './stickyplayer.component.css',
-  imports: [EpisodeTimeFormatPipe, NoUiSliderComponent],
-  providers: [EpisodeTimeFormatPipe],
+    selector: 'sticky-player',
+    templateUrl: './stickyplayer.component.html',
+    styleUrl: './stickyplayer.component.css',
+    imports: [EpisodeTimeFormatPipe, NoUiSliderComponent],
+    providers: [EpisodeTimeFormatPipe]
 })
 export class StickyPlayerComponent implements OnDestroy {
   public state: EpisodeState;

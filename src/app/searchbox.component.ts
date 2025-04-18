@@ -15,11 +15,10 @@ const modules = [
 ];
 
 @Component({
-  selector: "search-box",
-  standalone: true,
-  templateUrl: "./searchbox.component.html",
-  styleUrl: "./searchbox.component.css",
-  imports: [modules],
+    selector: "search-box",
+    templateUrl: "./searchbox.component.html",
+    styleUrl: "./searchbox.component.css",
+    imports: [modules]
 })
 export class SearchBoxComponent {
   @Output() searchResults = new EventEmitter<any[]>();

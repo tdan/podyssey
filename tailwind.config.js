@@ -7,13 +7,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  flyonui: {
-    themes: ["soft", "light", "dark"],
-    darkTheme: "dark",
-  },
-  plugins: [
-    require("flyonui"),
-    require("flyonui/plugin"),
-  ],
 }
 

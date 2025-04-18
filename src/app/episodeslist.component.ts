@@ -12,11 +12,10 @@ const MatModules = [
 ];
 
 @Component({
-  standalone: true,
-  selector: 'episodes-list',
-  templateUrl: './episodeslist.component.html',
-  styleUrls: ['./episodeslist.component.css'],
-  imports: [MatModules, PlayEpisodeButtonComponent],
+    selector: 'episodes-list',
+    templateUrl: './episodeslist.component.html',
+    styleUrls: ['./episodeslist.component.css'],
+    imports: [MatModules, PlayEpisodeButtonComponent]
 })
 export class EpisodesListComponent implements OnInit {
   @Input() episodes: Episode[];

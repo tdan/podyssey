@@ -4,11 +4,10 @@ import { SubscribePodcastButtonComponent } from "./subscribe_podcast_button.comp
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
-  standalone: true,
-  selector: 'podcasts-list',
-  templateUrl: './podcastslist.component.html',
-  styleUrls: ['./podcastslist.component.css'],
-  imports: [RouterLink, RouterLinkActive, SubscribePodcastButtonComponent],
+    selector: 'podcasts-list',
+    templateUrl: './podcastslist.component.html',
+    styleUrls: ['./podcastslist.component.css'],
+    imports: [RouterLink, RouterLinkActive, SubscribePodcastButtonComponent]
 })
 export class PodcastsListComponent {
   @Input() podcasts: Podcast[];

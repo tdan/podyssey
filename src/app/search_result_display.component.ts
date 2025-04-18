@@ -5,11 +5,10 @@ import { PodcastsListComponent } from "./podcastslist.component";
 import { Podcast } from "./core/models/podcast.model";
 
 @Component({
-  selector: "search-result-display",
-  standalone: true,
-  templateUrl: "./search_result_display.component.html",
-  styleUrl: "./search_result_display.component.css",
-  imports: [PodcastsListComponent],
+    selector: "search-result-display",
+    templateUrl: "./search_result_display.component.html",
+    styleUrl: "./search_result_display.component.css",
+    imports: [PodcastsListComponent]
 })
 export class SearchResultDisplayComponent implements OnInit {
   public results: Podcast[];

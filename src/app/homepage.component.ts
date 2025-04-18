@@ -4,11 +4,10 @@ import { ActivatedRoute, RouterLink } from "@angular/router";
 import { SubscribePodcastButtonComponent } from "./subscribe_podcast_button.component";
 
 @Component({
-  selector: "home-page",
-  standalone: true,
-  templateUrl: "./homepage.component.html",
-  styleUrl: "./homepage.component.css",
-  imports: [RouterLink, SubscribePodcastButtonComponent]
+    selector: "home-page",
+    templateUrl: "./homepage.component.html",
+    styleUrl: "./homepage.component.css",
+    imports: [RouterLink, SubscribePodcastButtonComponent]
 })
 export class HomepageComponent {
   public trending: Podcast[];

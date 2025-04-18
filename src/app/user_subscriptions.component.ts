@@ -6,11 +6,10 @@ import { NgOptimizedImage } from "@angular/common";
 import { PodcastsListComponent } from "./podcastslist.component";
 
 @Component({
-  selector: "user-subcriptions",
-  standalone: true,
-  templateUrl: "./user_subscriptions.component.html",
-  styleUrl: "./user_subscriptions.component.css",
-  imports: [NgOptimizedImage, PodcastsListComponent],
+    selector: "user-subcriptions",
+    templateUrl: "./user_subscriptions.component.html",
+    styleUrl: "./user_subscriptions.component.css",
+    imports: [NgOptimizedImage, PodcastsListComponent]
 })
 export class UserSubscriptionsComponent implements OnInit {
   subscriptionList: Podcast[] = [];
