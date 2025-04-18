@@ -1,17 +1,12 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { Event, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { StickyPlayerComponent } from './stickyplayer.component';
 import { SidebarComponent } from './sidebar.component';
 import { SearchBoxComponent } from './searchbox.component';
 
-import { IStaticMethods } from 'flyonui/flyonui';
 import { LocalUserController } from './core/controllers/localuser.controller';
 import { HomepageComponent } from './homepage.component';
-declare global {
-  interface Window {
-    HSStaticMethods: IStaticMethods;
-  }
-}
+
 
 @Component({
     selector: 'app-root',
@@ -28,10 +23,12 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    this.router.events.subscribe((event) => {
+    this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         setTimeout(() => {
-          window.HSStaticMethods.autoInit();
+          if (typeof window !== "undefined" && window.HSStaticMethods) {
+            window.HSStaticMethods.autoInit();
+          }
         }, 100);
       }
     });

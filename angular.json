@@ -27,7 +27,6 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -45,7 +44,8 @@
                 "input": "src/assets/scripts/custom.js",
                 "inject": true,
                 "bundleName": "custom",
-              }
+              },
+              "./node_modules/jquery/dist/jquery.min.js",
             ]
           },
           "configurations": {
@@ -109,7 +109,6 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles.css"
             ],
             "scripts": []

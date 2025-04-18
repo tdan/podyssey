@@ -3,7 +3,7 @@
   @for (state of episodeStates; track state) {
     @if (state.episodeInfo != undefined) {
     <li class="flex flex-row mb-5">
-      <div class="gap-3 transition duration-500 shadow ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md flex flex-1 items-center p-4">
+      <div class="gap-3 transition duration-500 shadow-sm ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md flex flex-1 items-center p-4">
         <img class="max-h-64 flex-none rounded-full mx-auto" src="{{
           state.episodeInfo!.imageUrl }}" />
         <div class="p-5">

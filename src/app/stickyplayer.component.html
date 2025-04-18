@@ -9,11 +9,11 @@
     [cssPrefix]="''"
     [cssClasses]='{
       "target": "relative h-2 rounded-full bg-neutral/10 range-slider-disabled:pointer-events-none range-slider-disabled:opacity-50",
-      "base": "size-full relative z-[1]",
+      "base": "size-full relative z-1",
       "origin": "absolute top-0 end-0 rtl:start-0 size-full origin-[0_0] rounded-full",
       "handle": "hidden",
       "connects": "relative z-0 w-full h-2 rtl:rounded-e-full rtl:rounded-s-none rounded-s-full overflow-hidden",
-      "connect": "absolute top-0 end-0 rtl:start-0 z-[1] size-full bg-primary origin-[0_0] -translate-y-2/4",
+      "connect": "absolute top-0 end-0 rtl:start-0 z-1 size-full bg-primary origin-[0_0] -translate-y-2/4",
       "touchArea": "absolute -top-1 -bottom-1 -start-1 -end-1",
     }'
     [(value)]="progress"
@@ -107,11 +107,11 @@
           [cssPrefix]="''"
           [cssClasses]='{
             "target": "relative h-2 rounded-full bg-neutral/10",
-            "base": "size-full relative z-[1]",
+            "base": "size-full relative z-1",
             "origin": "absolute top-0 end-0 rtl:start-0 size-full origin-[0_0] rounded-full",
             "handle": "absolute top-1/2 end-0 rtl:start-0 size-4 bg-base-100 border-[3px] border-primary rounded-full translate-x-2/4 -translate-y-2/4 hover:cursor-grab active:cursor-grabbing hover:ring-2 ring-primary active:ring-[3px]",
             "connects": "relative z-0 w-full h-2 rtl:rounded-e-full rtl:rounded-s-none rounded-s-full overflow-hidden",
-            "connect": "absolute top-0 end-0 rtl:start-0 z-[1] size-full bg-primary origin-[0_0]  -translate-y-2/4",
+            "connect": "absolute top-0 end-0 rtl:start-0 z-1 size-full bg-primary origin-[0_0]  -translate-y-2/4",
             "touchArea": "absolute -top-1 -bottom-1 -start-1 -end-1"
           }'
           [(value)]="volume"
