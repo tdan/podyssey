@@ -1,38 +1,30 @@
 import { Component } from '@angular/core';
-import { Event, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { StickyPlayerComponent } from './stickyplayer.component';
 import { SidebarComponent } from './sidebar.component';
 import { SearchBoxComponent } from './searchbox.component';
-
 import { LocalUserController } from './core/controllers/localuser.controller';
-import { HomepageComponent } from './homepage.component';
+import { PodchaserService } from './core/services/podchaser.service';
+import { PodcastAPIService } from './core/services/podcast_api.service';
 
 
 @Component({
-    selector: 'app-root',
-    imports: [RouterOutlet, StickyPlayerComponent, SidebarComponent, SearchBoxComponent, HomepageComponent],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css'
+  selector: 'app-root',
+  imports: [RouterOutlet, StickyPlayerComponent, SidebarComponent, SearchBoxComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+  providers: [
+    { provide: PodcastAPIService, useClass: PodchaserService },
+  ]
 })
 export class AppComponent {
   title = 'Podyssey';
 
   constructor(
-    private router: Router,
     private userController: LocalUserController
   ) {}
 
   ngOnInit() {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationEnd) {
-        setTimeout(() => {
-          if (typeof window !== "undefined" && window.HSStaticMethods) {
-            window.HSStaticMethods.autoInit();
-          }
-        }, 100);
-      }
-    });
-
     // initialize user
     this.userController.getLocalUser()
       .then((user) => {

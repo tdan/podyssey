@@ -1,52 +1,122 @@
-<div class="flex w-full flex-wrap" id="trending">
-  <h3>Trending</h3>
-  <div
-    id="draggable"
-    data-carousel='{ "loadingClasses": "opacity-0","slidesQty": { "xs": 1, "lg":
-    5 }, "isDraggable": true }'
-    class=""
-  >
-    <div class="carousel h-80">
-      <div class="carousel-body h-full carousel-dragging:transition-none
-        carousel-dragging:cursor-grabbing cursor-grab opacity-0">
-      @for (podcast of trending; track podcast) {
-        <div class="carousel-slide">
-          <div class="card mx-2 transition duration-500 shadow ease-in-out transform
-            hover:translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md">
-            <a routerLink="/podcast/{{ podcast.id }}">
-              <!-- <figure><img src="{{ podcast.imageUrl }}" alt="podcast-image" -->
-                <!-- class="size-full object-cover">/></figure> -->
-              <div class="card-body">
-                <h6 class="card-title mb-2.5">{{ podcast.title }}</h6>
-                <!-- <p>Discover iconic landmarks, world-class museums, and exquisite cuisine. Explore the Eiffel Tower, Louvre Museum, and charming neighborhoods.</p> -->
-              </div>
-              <div class="card-footer">
-                <subscribe-podcast-button
-                  [podcast]="podcast"></subscribe-podcast-button>
-              </div>
-            </a>
-          </div>
-       </div>
-      }
-      </div>
-    </div>
+<section id="continue-listening" class="flex w-full flex-col mb-10">
+  <div class="heading">
+    <h3 class="text-3xl">Continue Listening</h3>
   </div>
-  <!-- <div class="sm:flex not-last:*:border-e not-last:*:border-base-content/25 max-w-sm sm:max-w-full"> -->
-  <!-- @for (podcast of trending; track podcast) { -->
-  <!--   <div class="card mx-2 transition duration-500 shadow ease-in-out transform -->
-  <!--     hover:translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md"> -->
-  <!--     <a routerLink="/podcast/{{ podcast.id }}"> -->
-  <!--       <figure><img src="{{ podcast.imageUrl }}" alt="podcast-image" /></figure> -->
-  <!--       <div class="card-body"> -->
-  <!--         <h6 class="card-title mb-2.5">{{ podcast.title }}</h6> -->
-  <!--         <!-- <p>Discover iconic landmarks, world-class museums, and exquisite cuisine. Explore the Eiffel Tower, Louvre Museum, and charming neighborhoods.</p> --> -->
-  <!--       </div> -->
-  <!--       <div class="card-footer"> -->
-  <!--         <subscribe-podcast-button -->
-  <!--           [podcast]="podcast"></subscribe-podcast-button> -->
-  <!--       </div> -->
-  <!--     </a> -->
-  <!--   </div> -->
-  <!-- } -->
-  <!-- </div> -->
-</div>
+  <div class="carousel carousel-center no-bg max-w-full space-x-4">
+    @for (hist of localUser!.playbackHistory; track hist) {
+      <div class="carousel-item max-w-70">
+        <div class="card bg-base-100 shadow-sm">
+          <img src="{{ hist.episodeInfo!.imageUrl }}"
+            class="rounded-lg" alt="{{ hist.episodeInfo!.title }}" />
+          <div class="card-body">
+            <h2 class="card-title line-clamp-2 ellisis">{{ hist.episodeInfo!.title
+            }}</h2>
+            <div class="card-actions justify-end">
+              <play-episode-button
+                [episode]="hist.episodeInfo!">
+              </play-episode-button>
+            </div>
+          </div>
+        </div>
+     </div>
+    }
+  </div>
+</section>
+
+<!-- See What's New -->
+<section id="see-what-new" class="flex w-full flex-col mb-10">
+  <div class="heading">
+    <h3 class="text-3xl">See What's New</h3>
+  </div>
+  <div class="carousel carousel-center no-bg max-w-full space-x-4">
+    @for (episode of latestEpisodes; track episode) {
+      <div class="carousel-item max-w-70">
+        <div class="card bg-base-100 shadow-sm">
+          <img src="{{ episode.imageUrl }}" class="rounded-lg" alt="{{ episode.title }}" />
+          <div class="card-body">
+            <h2 class="card-title line-clamp-2 ellisis">{{ episode.title
+            }}</h2>
+            <div class="card-actions justify-end">
+              <play-episode-button
+                [episode]="episode">
+              </play-episode-button>
+            </div>
+          </div>
+        </div>
+     </div>
+    }
+  </div>
+</section>
+
+<!-- Caterogies -->
+<section id="categories" class="flex w-full flex-col mb-10">
+  <div class="heading">
+    <h3 class="text-3xl">Poppular Categories</h3>
+  </div>
+  <div class="flex flex-row flex-full gap-4">
+    <a routerLink="/category/science" class="card bg-success text-neutral-content w-full h-48">
+      <div class="card-body items-center text-center justify-center-safe">
+        <span class="icon-[tabler--brain] text-4xl"></span>
+        <h2 class="card-title text-xl">
+          Science
+        </h2>
+      </div>
+    </a>
+    <a routerLink="/category/news" class="card bg-info text-neutral-content w-full h-48">
+      <div class="card-body items-center text-center justify-center-safe">
+        <span class="icon-[tabler--news] text-4xl"></span>
+        <h2 class="card-title text-xl">
+          News
+        </h2>
+      </div>
+    </a>
+    <a routerLink="/category/business" class="card bg-warning text-neutral-content w-full h-48">
+      <div class="card-body items-center text-center justify-center-safe">
+        <span class="icon-[tabler--chart-histogram] text-4xl"></span>
+        <h2 class="card-title text-xl">
+          Business
+        </h2>
+      </div>
+    </a>
+    <a routerLink="/category/health" class="card bg-error text-neutral-content w-full h-48">
+      <div class="card-body items-center text-center justify-center-safe">
+        <span class="icon-[tabler--heart] text-4xl"></span>
+        <h2 class="card-title text-xl">
+          Health
+        </h2>
+      </div>
+    </a>
+    <a routerLink="/category/education" class="card bg-secondary text-neutral-content w-full h-48">
+      <div class="card-body items-center text-center justify-center-safe">
+        <span class="icon-[tabler--book-2] text-4xl"></span>
+        <h2 class="card-title text-xl">
+          Education
+        </h2>
+      </div>
+    </a>
+    <a routerLink="/category/culture" class="card bg-primary text-neutral-content w-full h-48">
+      <div class="card-body items-center text-center justify-center-safe">
+        <span class="icon-[tabler--building-pavilion] text-4xl"></span>
+        <h2 class="card-title text-xl">
+          Culture
+        </h2>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Trending -->
+<section id="trending" class="flex w-full flex-col">
+  <div class="heading">
+    <h3 class="text-3xl">Trending</h3>
+  </div>
+  <div class="carousel carousel-center no-bg max-w-full space-x-4">
+    @for (podcast of trending; track podcast) {
+      <div class="carousel-item">
+        <a routerLink="/podcast/{{ podcast.id }}">
+          <img src="{{ podcast.imageUrl }}" class="max-h-60 rounded-lg" alt="{{ podcast.title }}" />
+        </a>
+     </div>
+    }
+  </div>
+</section>

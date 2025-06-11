@@ -6,6 +6,9 @@ import { v4 as uuid } from "uuid";
 import { StreamEpisodeService } from "../services/streamepisode.service";
 import { Subscription, bufferTime, map } from "rxjs";
 import { EpisodeState } from "../models/episode_state.interface";
+import { Episode } from "../models/episode.model";
+import { PodcastAPIService } from "../services/podcast_api.service";
+import { PodcastIndexService } from "../services/podcastindex.service";
 
 @Injectable({
   providedIn: "root"
@@ -19,6 +22,7 @@ export class LocalUserController {
   constructor(
     private localDBService: PouchDBService,
     private streamService: StreamEpisodeService,
+    private podcastAPIService: PodcastAPIService,
   ) {
     // Get a snapshot of episode streaming state every 30 seconds
     this.streamObserver = this.streamService.getState()
@@ -70,9 +74,6 @@ export class LocalUserController {
     try {
       let allDocs = await this.localDBService.getAll();
 
-      console.log("[All Doc]", allDocs);
-      console.log("[All Doc]", allDocs.total_rows);
-
       if(allDocs.total_rows > 0) {
         this.currentUser!.name = allDocs.rows[0].doc.name;
         this.currentUser!.email = allDocs.rows[0].doc.email;
@@ -83,8 +84,6 @@ export class LocalUserController {
         this.currentUser!.playbackHistory = allDocs.rows[0].doc.playbackHistory;
 
         this._rev = allDocs.rows[0].doc._rev;
-
-        console.log("[Current User]", this.currentUser);
 
         return this.currentUser;
       }
@@ -127,8 +126,6 @@ export class LocalUserController {
             item.episodeInfo!.id == episode.episodeInfo!.id
         );
 
-    console.log("[playbackHistory] ", foundIdx);
-
     if (foundIdx < 0)
       this.currentUser!.playbackHistory.push(episode);
     else {
@@ -136,6 +133,26 @@ export class LocalUserController {
     }
 
     this.save();
+  }
+
+
+  public getLatestEpisodes(): Episode[] {
+
+    let latestEpisodes: Episode[] = [];
+
+    for (const podcast of this.currentUser!.favoritePodcasts) {
+
+      this.podcastAPIService.getEpisodesInPodcast(
+          podcast.id,
+          {"max": 1, "newest": "true"}
+      ).subscribe( (episodes) => {
+        console.log(episodes);
+        latestEpisodes.push(episodes[0]);
+      });
+
+    }
+
+    return latestEpisodes;
   }
 
 
@@ -159,8 +176,7 @@ export class LocalUserController {
     var password = "";
 
     for (var i = 0; i < passwordLength; i++) {
-      var rand = Math.floor(Math.random() * chars.length);
-      password += chars.substring(rand, rand + 1);
+      var rand = Math.floor(Math.random() * chars.length); password += chars.substring(rand, rand + 1);
     }
 
     return password;

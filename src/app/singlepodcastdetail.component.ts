@@ -3,6 +3,7 @@ import { PodcastIndexService } from "./core/services/podcastindex.service";
 import { ActivatedRoute } from "@angular/router";
 import { EpisodesListComponent } from "./episodeslist.component";
 import { Episode } from "./core/models/episode.model";
+import { PodcastAPIService } from "./core/services/podcast_api.service";
 
 @Component({
     selector: "single-podcast-detail",
@@ -14,7 +15,7 @@ export class SinglePodcastDetailComponent implements OnInit {
   episodes: Episode[] = [];
 
   constructor(
-    private podcastIdxApi: PodcastIndexService,
+    private podcastApi: PodcastAPIService,
     private route: ActivatedRoute
   ) {}
 
@@ -22,7 +23,7 @@ export class SinglePodcastDetailComponent implements OnInit {
 
     const podcastId: number = Number(this.route.snapshot.paramMap.get("id"));
 
-    this.podcastIdxApi.getEpisodesInPodcast(podcastId)
+    this.podcastApi.getEpisodesInPodcast(podcastId)
       .subscribe(data => {
         this.episodes = data;
       }

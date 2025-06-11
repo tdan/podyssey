@@ -31,11 +31,6 @@
             ],
             "scripts": [
               {
-                "input": "./node_modules/flyonui/flyonui.js",
-                "inject": true,
-                "bundleName": "flyonui",
-              },
-              {
                 "input": "./node_modules/nouislider/dist/nouislider.js",
                 "inject": true,
                 "bundleName": "noUiSlider",

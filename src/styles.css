@@ -1,16 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'tailwindcss';
-@import "flyonui/variants.css";
-
-@plugin "flyonui" {
-  themes: soft --default, light, dark --prefersdark, ghibli, shadcn, slack;
-}
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: bumblebee --default, cupcake, pastel, nord, lofi, aqua, synthwave, valentine, halloween --prefersdark
+};
+@plugin "@tailwindcss/typography";
 
 @plugin "@iconify/tailwind4";
-
-@source "../node_modules/flyonui/flyonui.js";
-
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,

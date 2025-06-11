@@ -5,17 +5,19 @@ import { Episode } from '../models/episode.model';
 import { Podcast } from '../models/podcast.model'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-// import PodcastIndexClient from "podcastdx-client";
 import { env } from "../../../environments/environment";
+import { PodcastAPIService } from './podcast_api.service';
+
 
 const API_URL: string = env['PODCAST_IDX_API_URL'];
 const API_KEY: string = env['PODCAST_IDX_API_KEY'];
 const API_SECRET: string = env['PODCAST_IDX_API_SECRET'];
 
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
-export class PodcastIndexService {
+export class PodcastIndexService implements PodcastAPIService {
 
   /** PodcastIndexClient currently not working due to process is undefined
    ** error with mixpanel.js
@@ -26,6 +28,9 @@ export class PodcastIndexService {
   constructor(private httpClient: HttpClient) {
     this.authHeaders = this.prepareAuthHeaders();
   }
+    public getPodcastsByTerm(query: {} | string): Observable<Podcast[]> {
+        throw new Error('Method not implemented.');
+    }
 
   public getRecentEpisodes(max: number = 7): Observable<any> {
 
@@ -44,10 +49,22 @@ export class PodcastIndexService {
    * @returns episodes
    *
    */
-  public getEpisodesInPodcast(feedID: number): Observable<Episode[]> {
+  public getEpisodesInPodcast(
+    feedID: number,
+    options: {} = {},
+  ): Observable<Episode[]> {
+
+    let paramString = "";
+    for (const key in options) {
+      paramString += "&" + key + "=" + options[key];
+    }
 
     let response$: Observable<any> = this.httpClient.
-      get(API_URL + '/episodes/byfeedid?id=' + feedID + '&pretty', {headers: this.authHeaders});
+      get(API_URL
+        + '/episodes/byfeedid?id=' + feedID
+        + paramString
+        + '&pretty'
+      , {headers: this.authHeaders});
 
     return response$.pipe(
       map(data => {
@@ -102,7 +119,7 @@ export class PodcastIndexService {
    * @returns Podcasts that match terms in `query`
    *
    */
-  public getPodcastsbyTerm(query: string): Observable<Podcast[]> {
+  public getPodcastsbyTerm(query: {} | string): Observable<Podcast[]> {
 
     let response$: Observable<any> = this.httpClient.
       get(API_URL + "/search/byterm?q=" + query + "&pretty", {headers: this.authHeaders});
@@ -130,7 +147,7 @@ export class PodcastIndexService {
    * @param [max=10] Maximum number of result to returns. Default = 10
    * @return the podcasts/feeds that in the index that are trending.
    */
-  public getTrendingPodcasts(max: number = 10): Observable<Podcast[]> {
+  public getTrendingPodcasts(max: number): Observable<Podcast[]> {
 
     let response$: Observable<any> = this.httpClient.
       get(API_URL + "/podcasts/trending?max=" + max + "&pretty", { headers: this.authHeaders });

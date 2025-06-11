@@ -1,4 +1,5 @@
-<div class="sticky-player fixed inset-x-0 bottom-0 pb-5 bg-base-100">
+<div class="sticky-player fixed inset-x-0 bottom-0 pb-5 bg-base-100 border-top
+  shadow-xl">
   @if (state.episodeInfo != undefined) {
   <nouislider
     #progress_slider
@@ -8,7 +9,7 @@
     [step]="1"
     [cssPrefix]="''"
     [cssClasses]='{
-      "target": "relative h-2 rounded-full bg-neutral/10 range-slider-disabled:pointer-events-none range-slider-disabled:opacity-50",
+      "target": "relative h-1 rounded-full bg-neutral/10 range-slider-disabled:pointer-events-none range-slider-disabled:opacity-50",
       "base": "size-full relative z-1",
       "origin": "absolute top-0 end-0 rtl:start-0 size-full origin-[0_0] rounded-full",
       "handle": "hidden",
@@ -24,7 +25,7 @@
   <div class="flex flex-row row-span-full mt-5 items-center">
     <!-- Buttons & Timing Info -->
     <div class="play-control flex flex-row items-center basis-1/4 justify-start">
-      <button class="btn btn-text btn-primary"
+      <button class="btn btn-ghost btn-primary"
         aria-label="Rewind 10s"
         (click)="seek(-10)"
       >
@@ -32,12 +33,12 @@
       </button>
 
       @if (state.loading) {
-        <button class="btn btn-text">
+        <button class="btn btn-ghost">
           <span class="loading loading-spinner text-secondary size-10"></span>
         </button>
       }
       @else if (!state.playing) {
-        <button class="btn btn-text btn-primary"
+        <button class="btn btn-ghost btn-primary"
           aria-label="Play"
           (click)="play()"
         >
@@ -45,7 +46,7 @@
         </button>
       }
       @else {
-        <button class="btn btn-text btn-outline"
+        <button class="btn btn-ghost btn-primary"
           aria-label="Pause"
           (click)="pause()"
         >
@@ -53,7 +54,7 @@
         </button>
       }
 
-      <button class="btn btn-text btn-primary p-1"
+      <button class="btn btn-ghost btn-primary p-1"
         aria-label="Forward 30s"
         (click)="seek(30)"
       >
@@ -84,7 +85,7 @@
 
     <!-- Volume Control -->
     <div class="vol-control flex flex-row basis-1/4 items-center justify-center">
-      <button class="btn btn-text btn-primary"
+      <button class="btn btn-ghost btn-primary"
         aria-label="Mute/Unmute"
         (click)="toggleMute()"
       >
@@ -106,7 +107,7 @@
           [step]="0.10"
           [cssPrefix]="''"
           [cssClasses]='{
-            "target": "relative h-2 rounded-full bg-neutral/10",
+            "target": "relative h-1 rounded-full bg-neutral/10",
             "base": "size-full relative z-1",
             "origin": "absolute top-0 end-0 rtl:start-0 size-full origin-[0_0] rounded-full",
             "handle": "absolute top-1/2 end-0 rtl:start-0 size-4 bg-base-100 border-[3px] border-primary rounded-full translate-x-2/4 -translate-y-2/4 hover:cursor-grab active:cursor-grabbing hover:ring-2 ring-primary active:ring-[3px]",

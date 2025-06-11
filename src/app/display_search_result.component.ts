@@ -6,11 +6,11 @@ import { Podcast } from "./core/models/podcast.model";
 
 @Component({
     selector: "search-result-display",
-    templateUrl: "./search_result_display.component.html",
-    styleUrl: "./search_result_display.component.css",
+    templateUrl: "./display_search_result.component.html",
+    styleUrl: "./display_search_result.component.css",
     imports: [PodcastsListComponent]
 })
-export class SearchResultDisplayComponent implements OnInit {
+export class DisplaySearchResultComponent implements OnInit {
   public results: Podcast[];
 
   constructor(

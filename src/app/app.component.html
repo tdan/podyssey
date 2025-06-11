@@ -1,10 +1,14 @@
-<div class="flex flex-row">
+<div class="flex flex-row pb-[5vh]">
   <div class="basis-1/6">
     <side-bar></side-bar>
   </div>
-  <div class="basis-4/6 flex flex-col items-center justify-center">
+  <div class="basis-5/6 flex flex-col items-center justify-center">
     <search-box></search-box>
-    <router-outlet></router-outlet>
+    <div class="main pr-5 mt-10">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
-<sticky-player></sticky-player>
+<div class="h-[5vh]">
+  <sticky-player></sticky-player>
+</div>

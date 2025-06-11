@@ -4,10 +4,10 @@
       <li class="flex justify-between items-start mb-5">
         <a routerLink="/podcast/{{ podcast.id }}">
           <div class="gap-3 transition duration-500 shadow-sm ease-in-out transform hover:-translate-y-1 hover:shadow-lg select-none cursor-pointer rounded-md flex flex-1 items-center p-4">
-            <img class="max-h-64 flex-none rounded-full mx-auto"
+            <img class="max-h-48 flex-none rounded-full mx-auto"
               src="{{ podcast.imageUrl }}" />
             <div>
-              <h6 class="block font-semibold">{{ podcast.title }}</h6>
+              <h5 class="block font-semibold text-lg">{{ podcast.title }}</h5>
               <span class="text-sm overflow-hidden line-clamp-6
               text-ellipsis">{{ podcast.description }}</span>
             </div>

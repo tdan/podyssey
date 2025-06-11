@@ -1,12 +1,10 @@
 <div class="search-box">
-  <div class="join w-96 py-3">
-    <div class="input-group join-item">
-      <span class="input-group-text">
-        <span class="icon-[tabler--brand-google-podcasts] text-base-content/80 size-5"></span>
-      </span>
-      <input type="text" #query class="input grow" placeholder="Search podcast..." id="groupInput" />
-    </div>
-    <button class="btn btn-primary waves waves-light join-item h-auto"
+  <div class="join py-3">
+    <label class="input join-item">
+      <span class="icon-[tabler--brand-google-podcasts] text-base-content/80 size-5"></span>
+      <input type="text" #query placeholder="Search podcast..." id="groupInput" />
+    </label>
+    <button class="btn btn-primary join-item"
       (click)="onSearchButtonClicked(query.value)">Search</button>
   </div>
 </div>
