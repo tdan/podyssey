@@ -141,12 +141,11 @@ export class LocalUserController {
     let latestEpisodes: Episode[] = [];
 
     for (const podcast of this.currentUser!.favoritePodcasts) {
-
       this.podcastAPIService.getEpisodesInPodcast(
           podcast.id,
           {"max": 1, "newest": "true"}
       ).subscribe( (episodes) => {
-        console.log(episodes);
+        // console.log(episodes);
         latestEpisodes.push(episodes[0]);
       });
 

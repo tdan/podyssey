@@ -10,30 +10,8 @@ import { PodcastAPIService } from "./podcast_api.service";
 const BEARER_TOKEN: string = env["PODCHASER_API_TOKEN"];
 const API_URL: string = env["PODCHASE_API_URL"];
 
-enum PodcastIdentifierType {
-  APPLE_PODCASTS,
-  SPOTIFY,
-  RSS,
-  PODCHASER,
-}
-
-enum PodcastSortType {
-  ALPHABETICAL,
-  RELEVANCE,
-  TRENDING,
-  RATING,
-  DATE_OF_FIRST_EPISODE,
-  FOLLOWER_COUNT,
-  POWER_SCORE,
-}
-
-enum SortDirection {
-  ASCENDING,
-  DESCENDING
-}
-
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class PodchaserService implements PodcastAPIService {
 
