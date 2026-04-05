@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as CryptoJS  from 'crypto-js';
+import CryptoJS from 'crypto-js';
 import { Episode } from '../models/episode.model';
 import { Podcast } from '../models/podcast.model'
 import { Observable } from 'rxjs';

@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-builders/custom-webpack": "^19.0.1",
+    "@angular-builders/custom-webpack": "^21.0.3",
     "@angular/animations": "^19.2.7",
     "@angular/cdk": "^19.2.10",
     "@angular/common": "^19.2.7",
@@ -33,7 +33,7 @@
     "jquery": "^3.7.1",
     "moment": "^2.30.1",
     "nouislider": "^15.8.1",
-    "podcastdx-client": "^5.1.0",
+    "podcastdx-client": "^4.0.0",
     "postcss": "^8.5.3",
     "pouchdb": "^9.0.0",
     "rxjs": "~7.8.0",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.8",
-    "@angular/cli": "^19.2.8",
+    "@angular/cli": "^21.2.3",
     "@angular/compiler-cli": "^19.2.7",
     "@iconify-json/tabler": "^1.2.17",
     "@iconify/tailwind4": "^1.0.6",

@@ -2,7 +2,6 @@ import { Observable } from "rxjs/internal/Observable";
 import { Episode } from "../models/episode.model";
 import { Podcast } from "../models/podcast.model";
 import { Injectable } from "@angular/core";
-import { PodchaserService } from "./podchaser.service";
 import { PodcastIndexService } from "./podcastindex.service";
 
 @Injectable({
