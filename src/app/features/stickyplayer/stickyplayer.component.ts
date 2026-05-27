@@ -1,9 +1,8 @@
 import { Component, OnDestroy, ViewChild, effect, signal } from '@angular/core';
-import { StreamEpisodeService } from './core/services/streamepisode.service';
+import { StreamEpisodeService } from '../../core/services/streamepisode.service';
 import { Subscription } from 'rxjs';
-import { EpisodeTimeFormatPipe } from "./shared/episodetimeformat.pipe";
-import { EpisodeState } from './core/models/episode_state.interface';
-
+import { EpisodeTimeFormatPipe } from "../../shared/pipes/episodetimeformat.pipe";
+import { EpisodeState } from '../../core/models/episode_state.interface';
 import { NoUiSliderComponent } from './nouislider.component';
 
 

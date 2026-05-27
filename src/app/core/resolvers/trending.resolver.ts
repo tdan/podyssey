@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, MaybeAsync, Resolve, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Podcast } from "../models/podcast.model";
 import { Observable } from "rxjs";
 import { PodcastAPIService } from "../services/podcast_api.service";

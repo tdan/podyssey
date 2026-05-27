@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { Podcast } from "./core/models/podcast.model";
-import { SubscribePodcastButtonComponent } from "./subscribe_podcast_button.component";
+import { Podcast } from "../../../core/models/podcast.model";
+import { SubscribePodcastButtonComponent } from "../../../shared/components/subscribe_podcast_button/subscribe_podcast_button.component";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({

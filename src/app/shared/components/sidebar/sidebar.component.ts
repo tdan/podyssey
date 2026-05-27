@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Podcast } from "./core/models/podcast.model";
+import { Podcast } from "../../../core/models/podcast.model";
 import { RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({

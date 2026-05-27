@@ -1,6 +1,6 @@
 import { Component, input } from "@angular/core"
-import { LocalUserController } from "./core/controllers/localuser.controller";
-import { Podcast } from "./core/models/podcast.model";
+import { LocalUserController } from "../../../core/controllers/localuser.controller";
+import { Podcast } from "../../../core/models/podcast.model";
 
 @Component({
   selector: "subscribe-podcast-button",

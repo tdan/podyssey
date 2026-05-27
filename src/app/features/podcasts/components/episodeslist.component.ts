@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { PlayEpisodeButtonComponent } from "./play_episode_button.component";
-import { Episode } from "./core/models/episode.model";
+import { PlayEpisodeButtonComponent } from "../../../shared/components/play_episode_button/play_episode_button.component";
+import { Episode } from "../../../core/models/episode.model";
 
 @Component({
     selector: 'episodes-list',

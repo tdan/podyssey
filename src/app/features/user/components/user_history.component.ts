@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { LocalUserController } from "./core/controllers/localuser.controller";
-import { UserProfile } from "./core/models/userprofile.model";
+import { LocalUserController } from "../../../core/controllers/localuser.controller";
+import { UserProfile } from "../../../core/models/userprofile.model";
 import { NgOptimizedImage } from "@angular/common";
-import { EpisodeState } from "./core/models/episode_state.interface";
-import { EpisodeStateListComponent } from "./episodestatelist.component";
+import { EpisodeState } from "../../../core/models/episode_state.interface";
+import { EpisodeStateListComponent } from "../../podcasts/components/episodestatelist.component";
 
 @Component({
     selector: "user-history",

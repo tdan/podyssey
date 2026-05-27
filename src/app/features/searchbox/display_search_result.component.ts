@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { PodcastIndexService } from "./core/services/podcastindex.service";
-import { PodcastsListComponent } from "./podcastslist.component";
-import { Podcast } from "./core/models/podcast.model";
+import { PodcastIndexService } from "../../core/services/podcastindex.service";
+import { PodcastsListComponent } from "../podcasts/components/podcastslist.component";
+import { Podcast } from "../../core/models/podcast.model";
 
 @Component({
     selector: "search-result-display",

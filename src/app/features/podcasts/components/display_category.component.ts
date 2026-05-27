@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { PodcastsListComponent } from "./podcastslist.component";
-import { Podcast } from "./core/models/podcast.model";
+import { Podcast } from "../../../core/models/podcast.model";
 import { ActivatedRoute } from "@angular/router";
-import { PodcastAPIService } from "./core/services/podcast_api.service";
+import { PodcastAPIService } from "../../../core/services/podcast_api.service";
 
 @Component({
   templateUrl: "./display_category.component.html",

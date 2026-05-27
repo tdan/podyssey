@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
-import { StreamEpisodeService } from "./core/services/streamepisode.service";
-import { Episode } from "./core/models/episode.model";
+import { StreamEpisodeService } from "../../../core/services/streamepisode.service";
+import { Episode } from "../../../core/models/episode.model";
 
 @Component({
   selector: "play-episode-button",

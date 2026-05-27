@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { LocalUserController } from "./core/controllers/localuser.controller";
-import { UserProfile } from "./core/models/userprofile.model";
-import { Podcast } from "./core/models/podcast.model";
+import { LocalUserController } from "../../../core/controllers/localuser.controller";
+import { UserProfile } from "../../../core/models/userprofile.model";
+import { Podcast } from "../../../core/models/podcast.model";
 import { NgOptimizedImage } from "@angular/common";
-import { PodcastsListComponent } from "./podcastslist.component";
+import { PodcastsListComponent } from "../../podcasts/components/podcastslist.component";
 
 @Component({
     selector: "user-subcriptions",

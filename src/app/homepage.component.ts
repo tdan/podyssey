@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import { Podcast } from "./core/models/podcast.model";
 import { ActivatedRoute, RouterLink } from "@angular/router";
-import { SubscribePodcastButtonComponent } from "./subscribe_podcast_button.component";
+import { SubscribePodcastButtonComponent } from "./shared/components/subscribe_podcast_button/subscribe_podcast_button.component";
 import { UserProfile } from "./core/models/userprofile.model";
 import { LocalUserController } from "./core/controllers/localuser.controller";
-import { PlayEpisodeButtonComponent } from "./play_episode_button.component";
+import { PlayEpisodeButtonComponent } from "./shared/components/play_episode_button/play_episode_button.component";
 import { Episode } from "./core/models/episode.model";
 
 @Component({

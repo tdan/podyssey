@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { StickyPlayerComponent } from './stickyplayer.component';
-import { SidebarComponent } from './sidebar.component';
-import { SearchBoxComponent } from './searchbox.component';
+import { StickyPlayerComponent } from "./features/stickyplayer/stickyplayer.component";
+import { SidebarComponent } from "./shared/components/sidebar/sidebar.component";
+import { SearchBoxComponent } from "./features/searchbox/searchbox.component";
 import { LocalUserController } from './core/controllers/localuser.controller';
 
 @Component({

@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { PodcastIndexService } from "./core/services/podcastindex.service";
 import { ActivatedRoute } from "@angular/router";
 import { EpisodesListComponent } from "./episodeslist.component";
-import { Episode } from "./core/models/episode.model";
-import { PodcastAPIService } from "./core/services/podcast_api.service";
+import { Episode } from "../../../core/models/episode.model";
+import { PodcastAPIService } from "../../../core/services/podcast_api.service";
 
 @Component({
     selector: "single-podcast-detail",
