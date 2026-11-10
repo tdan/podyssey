@@ -14,24 +14,23 @@ import { Episode } from "./core/models/episode.model";
     imports: [RouterLink, SubscribePodcastButtonComponent, PlayEpisodeButtonComponent]
 })
 export class HomepageComponent {
-  public trending: Podcast[];
-  public localUser: UserProfile | undefined;
-  public latestEpisodes: Episode[];
+    public trending: Podcast[];
+    public localUser: UserProfile | undefined;
+    public latestEpisodes: Episode[];
 
-  constructor(private route: ActivatedRoute, private localUserController: LocalUserController) {
-    this.trending = [];
+    constructor(private route: ActivatedRoute, private localUserController: LocalUserController) {
+        this.trending = [];
 
-    this.localUserController.getLocalUser()
-      .then( (user) => {
-        this.localUser = user;
-      }
-    );
+        this.localUserController.getLocalUser()
+            .then((user) => {
+                this.localUser = user;
+            });
 
-    this.latestEpisodes = [];
-  }
+        this.latestEpisodes = [];
+    }
 
-  public ngOnInit() {
-    this.trending = this.route.snapshot.data["trending"];
-    this.latestEpisodes = this.localUserController.getLatestEpisodes();
-  }
+    public ngOnInit() {
+        this.trending = this.route.snapshot.data["trending"];
+        // this.latestEpisodes = this.localUserController.getLatestEpisodes();
+    }
 }
